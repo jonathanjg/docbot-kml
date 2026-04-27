@@ -24,7 +24,9 @@ def lex(source: str) -> list[Token]:
         if char.isalpha() or char == "_":
             word = ""
 
-            while i < len(source) and (source[i].isalnum() or source[i] == "_"):
+            while i < len(source) and (
+                    source[i].isalnum() or source[i] == "_" or source[i] == "."
+            ):
                 word += source[i]
                 i += 1
 

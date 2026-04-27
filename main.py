@@ -1,7 +1,7 @@
 from lexer import lex
 
 
-source = 'relate chunks where doc_type = "pdf" to entity "audit";'
+source = 'relate chunks where metadata.documentation = "increment" to entity "increment_docs";'
 
 tokens = lex(source)
 

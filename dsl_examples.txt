@@ -1,0 +1,4 @@
+relate chunks where metadata.documentation = "increment" to entity "increment_docs";
+relate chunks where metadata.issue = "123456" to entity "releaseissues";
+relate chunks where connector_id = "docs-mount" to entity "mounted_docs";
+relate chunks where tenant_id = "default" to entity "default_tenant";
