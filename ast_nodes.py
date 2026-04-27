@@ -15,5 +15,5 @@ class EntityTarget:
 @dataclass(frozen=True)
 class RelationStatement:
     source: str
-    condition: EqualsCondition
+    conditions: list[EqualsCondition]
     target: EntityTarget

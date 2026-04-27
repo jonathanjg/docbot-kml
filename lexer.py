@@ -7,6 +7,7 @@ KEYWORDS = {
     "where": TokenType.WHERE,
     "to": TokenType.TO,
     "entity": TokenType.ENTITY,
+    "and": TokenType.AND,
 }
 
 

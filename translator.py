@@ -5,11 +5,12 @@ def to_qdrant_filter(statement: RelationStatement) -> dict:
     return {
         "must": [
             {
-                "key": statement.condition.field,
+                "key": condition.field,
                 "match": {
-                    "value": statement.condition.value,
+                    "value": condition.value,
                 },
             }
+            for condition in statement.conditions
         ]
     }
 

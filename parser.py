@@ -19,14 +19,26 @@ class Parser:
         self.index += 1
         return token
 
+    def parse_equals_condition(self) -> EqualsCondition:
+        field = self.consume(TokenType.IDENTIFIER, "Expected field name")
+        self.consume(TokenType.EQUAL, "Expected '=' after field name")
+        value = self.consume(TokenType.STRING, "Expected string value after '='")
+
+        return EqualsCondition(
+            field=field.text,
+            value=value.text,
+        )
+
     def parse(self) -> RelationStatement:
         self.consume(TokenType.RELATE, "Expected 'relate'")
         self.consume(TokenType.CHUNKS, "Expected 'chunks' after 'relate'")
         self.consume(TokenType.WHERE, "Expected 'where' after source")
 
-        field = self.consume(TokenType.IDENTIFIER, "Expected field name after 'where'")
-        self.consume(TokenType.EQUAL, "Expected '=' after field name")
-        value = self.consume(TokenType.STRING, "Expected string value after '='")
+        conditions = [self.parse_equals_condition()]
+
+        while self.current().type == TokenType.AND:
+            self.consume(TokenType.AND, "Expected 'and'")
+            conditions.append(self.parse_equals_condition())
 
         self.consume(TokenType.TO, "Expected 'to' after condition")
         self.consume(TokenType.ENTITY, "Expected 'entity' after 'to'")
@@ -37,10 +49,7 @@ class Parser:
 
         return RelationStatement(
             source="chunks",
-            condition=EqualsCondition(
-                field=field.text,
-                value=value.text,
-            ),
+            conditions=conditions,
             target=EntityTarget(
                 name=entity_name.text,
             ),

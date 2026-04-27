@@ -8,6 +8,7 @@ class TokenType(Enum):
     WHERE = auto()
     TO = auto()
     ENTITY = auto()
+    AND = auto()
 
     IDENTIFIER = auto()
     STRING = auto()
