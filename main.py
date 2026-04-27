@@ -1,5 +1,6 @@
 from lexer import lex
 from parser import Parser
+from translator import to_relation_job
 
 
 source = 'relate chunks where metadata.documentation = "increment" to entity "increment_docs";'
@@ -15,3 +16,8 @@ print("=== AST ===")
 parser = Parser(tokens)
 statement = parser.parse()
 print(statement)
+
+print()
+print("=== RELATION JOB ===")
+job = to_relation_job(statement)
+print(job)
